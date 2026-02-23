@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Modern Checkers</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header / Scoreboard -->
+        <header class="header">
+            <div class="score-card player-score active-turn" id="player-score-card">
+                <div class="score-label">You</div>
+                <div class="score-value" id="player-score">0</div>
+                <div class="turn-indicator"></div>
+            </div>
+
+            <div class="title-area">
+                <h1>Checkers</h1>
+                <div class="difficulty-display" id="current-difficulty">Medium</div>
+            </div>
+
+            <div class="score-card computer-score" id="computer-score-card">
+                <div class="score-label">Computer</div>
+                <div class="score-value" id="computer-score">0</div>
+                <div class="turn-indicator"></div>
+            </div>
+        </header>
+
+        <!-- Main Game Area -->
+        <main class="game-area">
+            <div class="board-container">
+                <div class="board" id="board">
+                    <!-- Board cells get injected here by JS -->
+                </div>
+            </div>
+
+            <!-- Messages overlay (e.g., "Your Turn", "Invalid Move") -->
+            <div class="message-overlay" id="message-overlay">
+                <p id="message-text"></p>
+            </div>
+        </main>
+
+        <!-- Footer / Controls -->
+        <footer class="footer">
+            <button class="btn btn-primary" id="btn-restart">Restart</button>
+            <button class="btn btn-secondary" id="btn-settings">Settings</button>
+            <button class="btn btn-secondary" id="btn-rules">Rules</button>
+        </footer>
+
+        <!-- Settings Modal (Difficulty selection, Guided mode) -->
+        <div class="modal" id="settings-modal">
+            <div class="modal-content">
+                <h2>Game Settings</h2>
+                <div class="setting-group">
+                    <label>Difficulty</label>
+                    <div class="difficulty-options">
+                        <button class="btn-diff" data-level="easy">Easy</button>
+                        <button class="btn-diff active" data-level="medium">Medium</button>
+                        <button class="btn-diff" data-level="hard">Hard</button>
+                    </div>
+                </div>
+
+                <div class="setting-group toggle-group">
+                    <label>Guided Mode</label>
+                    <label class="switch">
+                        <input type="checkbox" id="guided-mode-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="modal-text-sm">
+                    Guided Mode helps you train by showing the win probability of each possible move when you select a
+                    piece.
+                </div>
+
+                <button class="btn btn-primary mt-4 modal-close" id="btn-close-settings">Done</button>
+            </div>
+        </div>
+
+        <!-- Rules Modal -->
+        <div class="modal" id="rules-modal">
+            <div class="modal-content rules-content">
+                <h2>How to Play Checkers</h2>
+                <div class="rules-list">
+                    <ul>
+                        <li><strong>Objective:</strong> Capture all opponent pieces or block them so they cannot move.
+                        </li>
+                        <li><strong>Movement:</strong> Pieces always move diagonally forward one square (unless
+                            capturing).</li>
+                        <li><strong>Capturing:</strong> Jump over an opponent's adjacent piece into an empty square.
+                            Captures are <strong>mandatory</strong>.</li>
+                        <li><strong>Multi-Jumps:</strong> If a jump lands in a position where another jump is possible
+                            by the same piece, it must continue jumping.</li>
+                        <li><strong>Kings:</strong> When a piece reaches the opposite end of the board, it becomes a
+                            King (👑). Kings can move and jump both forward and backward.</li>
+                    </ul>
+                </div>
+                <button class="btn btn-primary mt-4 modal-close" id="btn-close-rules">Got it!</button>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div class="modal" id="game-over-modal">
+            <div class="modal-content text-center">
+                <h2 id="game-over-title">You Win!</h2>
+                <p id="game-over-message">You captured all the opponent's pieces.</p>
+                <div class="stats-row">
+                    <div class="stat"><span class="stat-lbl">Moves:</span> <span id="stat-moves">0</span></div>
+                    <div class="stat"><span class="stat-lbl">Time:</span> <span id="stat-time">0:00</span></div>
+                </div>
+                <button class="btn btn-primary mt-4 modal-close" id="btn-play-again">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
